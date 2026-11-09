@@ -36,17 +36,28 @@ public class LogAnalyzer
             hourCounts[hour]++;
         }
     }
-
+    //question 5
+    public LogAnalyzer(String filename)
+    { 
+        // Create the array object to hold the hourly
+        // access counts.
+        hourCounts = new int[HOURS_PER_DAY];
+        // Create the reader to obtain the data.
+        reader = new LogfileReader(filename);
+    }
     /**
      * Print the hourly counts.
      * These should have been set with a prior
      * call to analyzeHourlyData.
      */
+    //question 4
     public void printHourlyCounts()
     {
+        int hours = 0;
         System.out.println("Hr: Count");
-        for(int hour = 0; hour < hourCounts.length; hour++) {
-            System.out.println(hour + ": " + hourCounts[hour]);
+        while(hours < hourCounts.length) {
+            System.out.println(hours + ": " + hourCounts[hours]);
+            hours++;
         }
     }
     
@@ -57,4 +68,35 @@ public class LogAnalyzer
     {
         reader.printData();
     }
-}
+    //question 6
+    public int numberOfAccesses() { 
+int total = 0;
+ for(int hour = 1; hour < hourCounts.length; hour++){
+      total = total + hourCounts[hour]; 
+    } 
+    return total;
+   }
+   //question 8
+   public int busiestHour(){
+       int busiest = 0;
+       for(int hour : hourCounts){
+           if( hour > busiest){
+               busiest = hour;
+            }
+        }
+        return busiest;
+    }
+       
+    //question 9
+    public int quiestistHour(){
+        int quiestist = 0;
+        for (int hour =1; hour < hourCounts.length; hour++){
+            if(hourCounts[hour] < hourCounts[quiestist]){
+                 quiestist = hour;
+            }
+        }
+        return  quiestist;
+        }
+    }
+    
+           
